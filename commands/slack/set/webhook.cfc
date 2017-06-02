@@ -16,9 +16,9 @@ component {
 			arguments.webhookUrl = shell.ask( "Enter your slack Webhook URL: " );
 		}
 
-		SlackCommandUtils.storeDefaultWebhook( argumentCollection=arguments );
+		SlackCommandUtils.setDefaultWebhook( argumentCollection=arguments );
 
-		print.greenLine( "Thank you, global default slack webook has been set" );
+		print.greenLine( "Thank you, global default slack webook has been set to [#arguments.webhookUrl#]" );
 
 		return;
 	}

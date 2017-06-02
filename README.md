@@ -9,7 +9,12 @@ Install into Commandbox with `install slack-commandbox-commands`.
 
 ## Usage
 
+First, [register a webhook with Slack](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks). Then, in CommandBox:
+
 ```
-box slack add webhook $webhook_url;
+# set global default webhook URL (do this once)
+box slack set webhook $webhook_url;
+
+# send messages
 box slack message "hello world";
 ```

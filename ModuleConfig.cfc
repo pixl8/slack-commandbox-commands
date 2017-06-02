@@ -1,5 +1,5 @@
 component {
 	public any function configure() {
-		return;
+		settings = { defaultWebhook = "test" };
 	}
 }

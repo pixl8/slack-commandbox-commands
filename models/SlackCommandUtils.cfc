@@ -5,16 +5,16 @@ component {
 		return this;
 	}
 
-	public void function storeDefaultWebhook(
-		required string webhookUrl
-	) {
-		var configKey = "defaultslackwebhook";
+	public void function setDefaultWebhook( required string webhookUrl ) {
+		var configSettings = configService.getconfigSettings();
 
-		configService.setSetting( "defaultSlackWebhook", arguments.webhookUrl );
+		configSettings[ 'modules' ][ 'slack-commandbox-commands' ][ 'defaultWebhook' ] = arguments.webhookUrl;
 	}
 
 	public string function getDefaultWebhook() {
-		return configService.getSetting( "defaultSlackWebhook", "" );
+		var configSettings = configService.getconfigSettings();
+
+		return configSettings[ 'modules' ][ 'slack-commandbox-commands' ][ 'defaultWebhook' ] ?: "";
 	}
 
 	public struct function sendMessage( required string message, required string webhookUrl ) {
