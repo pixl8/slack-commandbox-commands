@@ -20,7 +20,7 @@ component {
 	 * @footerIcon.hint       Icon to accompany the message footer
 	 * @includeTimestamp.hint Whether or not to include a timestamp
 	 * @timestamp.hint        Timestamp (epoch time) of the message. Only used when includeTimestamp is true + defaults to the current time.
-	 * @webhookurl.hint       Webhook to send message too. If not supplied, the global default webhook registered with 'slack set webhook' will be used.
+	 * @webhook.hint          Webhook to send message too. If not supplied, the global default webhook registered with 'slack set webhook' will be used.
 	 **/
 	function run(
 		  required string  message
@@ -36,14 +36,14 @@ component {
 		,          string  footerIcon       = slackCommandUtils.getDefaultSetting( "footerIcon" )
 		,          boolean includeTimestamp = slackCommandUtils.getDefaultSetting( "includeTimestamp", false )
 		,          numeric timestamp        = slackCommandUtils.getEpoch()
-		,          string  webhookUrl       = slackCommandUtils.getDefaultSetting( "webhookUrl" )
+		,          string  webhook          = slackCommandUtils.getDefaultSetting( "webhook" )
 	) {
 		while( !arguments.message.len() ) {
 			arguments.message = shell.ask( "Enter the message you wish to send" );
 		}
 
-		while( !arguments.webhookUrl.len() ) {
-			arguments.webhookUrl = shell.ask( "Enter your slack Webhook URL: " );
+		while( !arguments.webhook.len() ) {
+			arguments.webhook = shell.ask( "Enter your slack Webhook URL: " );
 		}
 
 		SlackCommandUtils.sendMessage( argumentCollection=arguments );

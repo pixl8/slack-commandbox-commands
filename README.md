@@ -1,7 +1,8 @@
 Slack Commands for CommandBox
 -----------------------------
 
-A super simple commandbox command to post messages to Slack.
+Send messages to Slack from the Commandbox command line.
+
 
 ## Installation
 
@@ -13,8 +14,25 @@ First, [register a webhook with Slack](https://slack.com/apps/A0F7XDUAZ-incoming
 
 ```
 # set global default webhook URL (do this once)
-box slack set webhook $webhook_url;
+slack set defaults webhook=$webhook_url;
 
 # send messages
 box slack message "hello world";
 ```
+
+## Full list of commands
+
+```
+slack set  defaults
+slack show defaults
+slack send message
+```
+
+For all commands, append ` help` to see expected arguments and hints:
+
+```
+slack set  defaults help
+slack show defaults help
+slack send message  help
+```
+

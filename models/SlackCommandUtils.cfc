@@ -30,9 +30,15 @@ component {
 		return configSettings[ 'modules' ][ 'slack-commandbox-commands' ] ?: {};
 	}
 
+	public void function clearDefaults() {
+		var configSettings = configService.getConfigSettings();
+
+		configSettings[ 'modules' ][ 'slack-commandbox-commands' ] = {};
+	}
+
 	public struct function sendMessage(
 		  required string  message
-		, required string  webhookUrl
+		, required string  webhook
 		,          string  color            = ""
 		,          string  title            = ""
 		,          string  titleLink        = ""
@@ -85,7 +91,7 @@ component {
 			message[ "ts" ] = arguments.timestamp;
 		}
 
-		http url=arguments.webhookUrl method="POST" timeout=30 result="result" {
+		http url=arguments.webhook method="POST" timeout=30 result="result" {
 			httpparam type="header" name="Content-Type" value="application/json";
 			httpparam type="body" value=SerializeJson( { "attachments"=[ message ] } );
 		}

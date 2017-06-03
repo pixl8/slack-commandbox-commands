@@ -1,13 +1,13 @@
 /**
- * Register global default webhook
+ * Register global default settings for sending messages to slack
+ * with the 'slack send message' command.
  *
  **/
 component {
-
-	property name="SlackCommandUtils" inject="SlackCommandUtils@slack-commandbox-commands";
+	property name="slackCommandUtils" inject="SlackCommandUtils@slack-commandbox-commands";
 
 	/**
-	 * @webhookurl.hint       Default webhook to use when no webhook supplied to slack message command
+	 * @webhook.hint          Default webhook to use when no webhook supplied to slack message command
 	 * @title.hint            Default title for all slack messages
 	 * @titleLink.hint        Default title link for all slack messages
 	 * @color.hint            Default highlight color for all slack messages. Can be a hex value, or one of 'good', 'warning' or 'danger'
@@ -21,7 +21,7 @@ component {
 	 * @includeTimestamp.hint Default choice of whether or not to include a timestamp in messages
 	 **/
 	function run(
-		  string  webhookUrl
+		  string  webhook
 		, string  color
 		, string  title
 		, string  titleLink
@@ -36,7 +36,10 @@ component {
 	) {
 		SlackCommandUtils.setDefaults( argumentCollection=arguments );
 
-		print.greenLine( "Thank you, global defaults have been set: [#SerializeJson( arguments )#]" );
+		print.line( "" );
+		print.greenLine( "Thank you, global defaults have been set." );
+
+		command( "slack show defaults" ).run();
 
 		return;
 	}
