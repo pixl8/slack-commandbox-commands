@@ -24,19 +24,19 @@ component {
 	 **/
 	function run(
 		  required string  message
-		,          string  color            = ""
-		,          string  title            = ""
-		,          string  titleLink        = ""
-		,          string  pretext          = ""
-		,          string  thumbnail        = ""
-		,          string  author           = ""
-		,          string  authorLink       = ""
-		,          string  authorIcon       = ""
-		,          string  footer           = ""
-		,          string  footerIcon       = ""
-		,          boolean includeTimestamp = false
-		,          numeric timestamp
-		,          string  webhookUrl = slackCommandUtils.getDefaultWebhook()
+		,          string  color            = slackCommandUtils.getDefaultSetting( "color"      )
+		,          string  title            = slackCommandUtils.getDefaultSetting( "title"      )
+		,          string  titleLink        = slackCommandUtils.getDefaultSetting( "titleLink"  )
+		,          string  pretext          = slackCommandUtils.getDefaultSetting( "pretext"    )
+		,          string  thumbnail        = slackCommandUtils.getDefaultSetting( "thumbnail"  )
+		,          string  author           = slackCommandUtils.getDefaultSetting( "author"     )
+		,          string  authorLink       = slackCommandUtils.getDefaultSetting( "authorLink" )
+		,          string  authorIcon       = slackCommandUtils.getDefaultSetting( "authorIcon" )
+		,          string  footer           = slackCommandUtils.getDefaultSetting( "footer"     )
+		,          string  footerIcon       = slackCommandUtils.getDefaultSetting( "footerIcon" )
+		,          boolean includeTimestamp = slackCommandUtils.getDefaultSetting( "includeTimestamp", false )
+		,          numeric timestamp        = slackCommandUtils.getEpoch()
+		,          string  webhookUrl       = slackCommandUtils.getDefaultSetting( "webhookUrl" )
 	) {
 		while( !arguments.message.len() ) {
 			arguments.message = shell.ask( "Enter the message you wish to send" );

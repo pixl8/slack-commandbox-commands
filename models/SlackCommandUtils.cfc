@@ -5,18 +5,29 @@ component {
 		return this;
 	}
 
-	public void function setDefaultWebhook( required string webhookUrl ) {
+	public void function setDefaults() {
 		var configSettings = configService.getConfigSettings();
 
-		configSettings[ 'modules' ][ 'slack-commandbox-commands' ][ 'defaultWebhook' ] = arguments.webhookUrl;
+		configSettings[ 'modules' ][ 'slack-commandbox-commands' ] = configSettings[ 'modules' ][ 'slack-commandbox-commands' ] ?: {};
+		for( var key in arguments ) {
+			if ( !IsNull( arguments[ key ] ?: NullValue() ) ) {
+				configSettings[ 'modules' ][ 'slack-commandbox-commands' ][ key ] = arguments[ key ];
+			}
+		}
 
 		configService.setConfigSettings( configSettings );
 	}
 
-	public string function getDefaultWebhook() {
-		var configSettings = configService.getconfigSettings();
+	public any function getDefaultSetting( required string settingName, any defaultValue="" ) {
+		var configSettings = configService.getConfigSettings();
 
-		return configSettings[ 'modules' ][ 'slack-commandbox-commands' ][ 'defaultWebhook' ] ?: "";
+		return configSettings[ 'modules' ][ 'slack-commandbox-commands' ][ arguments.settingName ] ?: arguments.defaultValue;
+	}
+
+	public struct function getDefaults() {
+		var configSettings = configService.getConfigSettings();
+
+		return configSettings[ 'modules' ][ 'slack-commandbox-commands' ] ?: {};
 	}
 
 	public struct function sendMessage(
@@ -82,7 +93,7 @@ component {
 		return result;
 	}
 
-	private numeric function getEpoch( date localDate=Now() ) {
+	public numeric function getEpoch( date localDate=Now() ) {
 		var nineteenSeventy = DateConvert( 'utc2Local', CreateDateTime( 1970, 1, 1, 0, 0, 0 ) )
 	    return DateDiff( 's', nineteenSeventy, localDate );
 	}
