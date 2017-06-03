@@ -23,16 +23,17 @@ box slack message "hello world";
 ## Full list of commands
 
 ```
-slack set  defaults
-slack show defaults
 slack send message
+slack set defaults
+slack show defaults
+slack clear defaults
 ```
 
 For all commands, append ` help` to see expected arguments and hints:
 
 ```
-slack set  defaults help
+slack send message help
+slack set defaults help
 slack show defaults help
-slack send message  help
+slack clear defaults help
 ```
-
