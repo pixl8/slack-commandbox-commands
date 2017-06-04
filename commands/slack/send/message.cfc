@@ -46,7 +46,13 @@ component {
 			arguments.webhook = shell.ask( "Enter your slack Webhook URL: " );
 		}
 
-		SlackCommandUtils.sendMessage( argumentCollection=arguments );
+		var error = SlackCommandUtils.sendMessage( argumentCollection=arguments );
+
+		if ( error.len() ) {
+			print.redLine( "Error sending slack message: [#error#]" );
+		} else {
+			print.greenLine( "Message sent." );
+		}
 
 		return;
 	}

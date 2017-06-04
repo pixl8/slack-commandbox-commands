@@ -36,7 +36,7 @@ component {
 		configSettings[ 'modules' ][ 'slack-commandbox-commands' ] = {};
 	}
 
-	public struct function sendMessage(
+	public string function sendMessage(
 		  required string  message
 		, required string  webhook
 		,          string  color            = ""
@@ -96,7 +96,11 @@ component {
 			httpparam type="body" value=SerializeJson( { "attachments"=[ message ] } );
 		}
 
-		return result;
+		if ( ( result.statuscode ?: "" ) contains "200" ) {
+			return "";
+		}
+
+		return result.fileContent;
 	}
 
 	public numeric function getEpoch( date localDate=Now() ) {
