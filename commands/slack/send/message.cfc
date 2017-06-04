@@ -8,6 +8,8 @@ component {
 
 	/**
 	 * @message.hint          The message you wish to send. Check the Slack docs for formatting tips.
+	 * @channel.hint          Optional channel to send the message to (if different from configured channel of webhook)
+	 * @username.hint         Optional username to send the message with (if different from configured username of webhook)
 	 * @title.hint            Optional title of the slack message
 	 * @titleLink.hint        Optional link for the slack message title
 	 * @color.hint            Highlight color for the message. Can be a hex value, or one of 'good', 'warning' or 'danger'
@@ -25,6 +27,9 @@ component {
 	function run(
 		  required string  message
 		,          string  color            = slackCommandUtils.getDefaultSetting( "color"      )
+		,          string  channel          = slackCommandUtils.getDefaultSetting( "channel"    )
+		,          string  username         = slackCommandUtils.getDefaultSetting( "username"   )
+		,          string  emoji            = slackCommandUtils.getDefaultSetting( "emoji"      )
 		,          string  title            = slackCommandUtils.getDefaultSetting( "title"      )
 		,          string  titleLink        = slackCommandUtils.getDefaultSetting( "titleLink"  )
 		,          string  pretext          = slackCommandUtils.getDefaultSetting( "pretext"    )

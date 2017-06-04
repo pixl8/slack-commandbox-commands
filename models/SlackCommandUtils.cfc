@@ -39,6 +39,9 @@ component {
 	public string function sendMessage(
 		  required string  message
 		, required string  webhook
+		,          string  channel          = ""
+		,          string  username         = ""
+		,          string  emoji            = ""
 		,          string  color            = ""
 		,          string  title            = ""
 		,          string  titleLink        = ""
@@ -52,7 +55,8 @@ component {
 		,          boolean includeTimestamp = false
 		,          numeric timestamp        = getEpoch()
 	) {
-		var result = "";
+		var result  = "";
+		var payload = {};
 		var message = {
 			"text" = arguments.message
 		};
@@ -91,9 +95,21 @@ component {
 			message[ "ts" ] = arguments.timestamp;
 		}
 
+		payload = { "attachments"=[ message ] };
+
+		if ( Len( Trim( arguments.channel ) ) ) {
+			payload[ "channel" ] = arguments.channel;
+		}
+		if ( Len( Trim( arguments.username ) ) ) {
+			payload[ "username" ] = arguments.username;
+		}
+		if ( Len( Trim( arguments.emoji ) ) ) {
+			payload[ "icon_emoji" ] = ":#arguments.emoji#:";
+		}
+
 		http url=arguments.webhook method="POST" timeout=30 result="result" {
 			httpparam type="header" name="Content-Type" value="application/json";
-			httpparam type="body" value=SerializeJson( { "attachments"=[ message ] } );
+			httpparam type="body" value=SerializeJson( payload );
 		}
 
 		if ( ( result.statuscode ?: "" ) contains "200" ) {

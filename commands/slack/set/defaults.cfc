@@ -8,6 +8,9 @@ component {
 
 	/**
 	 * @webhook.hint          Default webhook to use when no webhook supplied to slack message command
+	 * @channel.hint          Default channel for all slack messages (if different from that configured in webhook)
+	 * @username.hint         Default username for all slack messages (if different from that configured in webhook)
+	 * @emoji.hint            Default emoji for all slack messages (if different from that configured in webhook)
 	 * @title.hint            Default title for all slack messages
 	 * @titleLink.hint        Default title link for all slack messages
 	 * @color.hint            Default highlight color for all slack messages. Can be a hex value, or one of 'good', 'warning' or 'danger'
@@ -22,6 +25,9 @@ component {
 	 **/
 	function run(
 		  string  webhook
+		, string  channel
+		, string  username
+		, string  emoji
 		, string  color
 		, string  title
 		, string  titleLink

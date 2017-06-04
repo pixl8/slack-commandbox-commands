@@ -14,6 +14,9 @@ component {
 		print.line( "=======================" );
 		print.line( "" );
 		print.line( "webhook          : " & SerializeJson( defaults.webhook          ?: ""    ) );
+		print.line( "channel          : " & SerializeJson( defaults.channel          ?: ""    ) );
+		print.line( "username         : " & SerializeJson( defaults.username         ?: ""    ) );
+		print.line( "emoji            : " & SerializeJson( defaults.emoji            ?: ""    ) );
 		print.line( "color            : " & SerializeJson( defaults.color            ?: ""    ) );
 		print.line( "title            : " & SerializeJson( defaults.title            ?: ""    ) );
 		print.line( "titleLink        : " & SerializeJson( defaults.titleLink        ?: ""    ) );
